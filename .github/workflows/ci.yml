@@ -1,0 +1,41 @@
+name: MLOps CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  train-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install dvc dvc-s3 mlflow scikit-learn pandas numpy fastapi uvicorn
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-north-1
+
+      - name: Pull data from DVC
+        run: dvc pull
+
+      - name: Train model
+        run: |
+          python train.py --dataset data/iris_v2.csv --model_type rf \
+          --n_estimators 100 --max_depth 3 \
+          --features "sepal length (cm)" "sepal width (cm)" "petal length (cm)" "petal width (cm)"
+
+      - name: Show metrics
+        run: cat models/metrics.json
