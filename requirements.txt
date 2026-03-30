@@ -1,3 +1,10 @@
+fastapi
+uvicorn
+mlflow
+scikit-learn
+numpy
+pandas
+EOF
 absl-py==2.3.1
 aext-assistant @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_5blio7a88h/croot/aext-assistant_1717062156186/work
 aext-assistant-server @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_84ykzx_q85/croot/aext-assistant-server_1717059976819/work
