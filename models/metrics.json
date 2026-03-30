@@ -1,0 +1,11 @@
+{
+  "name": "Urvashi Salonia",
+  "roll_no": "2022BCS0222",
+  "model_type": "lr",
+  "accuracy": 1.0,
+  "f1_score": 1.0,
+  "features": [
+    "petal length (cm)",
+    "petal width (cm)"
+  ]
+}
